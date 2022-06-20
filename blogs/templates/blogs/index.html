@@ -1,0 +1,35 @@
+{% load static %}
+
+<link rel="stylesheet" type = "text/css" href="{% static 'blogs/styles.css' %}">
+<h1>Welcome to the Groovy Space Blog</h1>
+{% if blogs_list %}
+        <ul>
+            <h2> Greetings {{user.username}}!</h2>
+            <div>
+                <a href="{% url 'blogs:create' %}">Make a New Post</a> <br> <br>
+                <a href="{% url 'blogs:selfPub' %}">Your posts</a> <br> <br>
+                <a href="{% url 'blogs:orderDate' %}">Newest to Oldest</a> <br> <br>
+                <a href="{% url 'blogs:todayDate' %}">Posts made today</a> <br> <br>
+                <a href="{% url 'blogs:search' %}">Looking for something?</a> <br>
+            </div>
+        <br><br>
+        <h2>The kool kats are talkin</h2>
+        {% for blog in blogs_list %}
+            <li>
+                <h4>{{ blog.title }}<br></h4>
+                Text: {{ blog.text }} <br> <br>
+                Written by: {{ blog.author }} <br>
+                Published on: {{ blog.published_date }} <br>
+                <span><a href="{% url 'blogs:update' blog.id %}">edit</a></span>
+                <span><a href="{% url 'blogs:delete' blog.id %}">delete</a></span>
+            </li>
+            <p> {{blog.author}}: <span style = "color:blue">{{user.username}}</span></p>
+            {% if blog.author == user %}
+                <p> --You wrote this article</p>
+            {% endif %}
+        {% endfor %}
+        </ul>
+
+{% else %}
+    <p>we are out in space now</p>
+{% endif %}

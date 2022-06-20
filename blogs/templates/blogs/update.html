@@ -1,0 +1,6 @@
+<a href="{% url 'blogs:index' %}">HOME</a>
+<form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Update">
+    <a href="{% url 'blogs:delete' post.id %}">delete</a>
+</form>

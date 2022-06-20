@@ -1,0 +1,22 @@
+{% load static %}
+<link rel="stylesheet" type = "text/css" href="{% static 'blogs/styles.css' %}">
+
+<h1>Posts Created Today</h1>
+<a href="{% url 'blogs:index' %}">Teleport back to SPACE </a>
+{% if blogs_list %}
+        <ul>        
+        {% for blog in blogs_list %}
+            <li>
+                <h4>{{ blog.title }}<br></h4>
+                Text: {{ blog.text }} <br>
+                Written by: {{ blog.author }} <br>
+                Published on: {{ blog.published_date }} <br>
+                <span><a href="{% url 'blogs:update' blog.id %}">edit</a></span>
+                <span><a href="{% url 'blogs:delete' blog.id %}">delete</a></span><br>
+            </li>
+        {% endfor %}
+        </ul>
+
+{% else %}
+    <p>Nothing but space here</p>
+{% endif %}

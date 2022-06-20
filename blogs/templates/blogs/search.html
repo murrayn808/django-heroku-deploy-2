@@ -1,0 +1,30 @@
+{% load static %}
+<link rel="stylesheet" type = "text/css" href="{% static 'blogs/styles.css' %}">
+
+<h1>GROOVY SPACE BLOG</h1>
+<a href="{% url 'blogs:index' %}">Teleport back to SPACE </a>
+{% if blogs_list %}
+        <ul>
+        <h3>What would you like to find?</h3>
+        <br>
+        <form method="GET">
+            {{ filter.form }}
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        
+
+        {% for blog in filter.qs %}
+            <li>
+                <h4>{{ blog.title }}<br></h4>
+                Text: {{ blog.text }} <br>
+                Written by: {{ blog.author }} <br>
+                Published on: {{ blog.published_date }} <br>
+                <span><a href="{% url 'blogs:update' blog.id %}">edit</a></span>
+                <span><a href="{% url 'blogs:delete' blog.id %}">delete</a></span><br>
+            </li>
+        {% endfor %}
+        </ul>
+
+{% else %}
+    <p>You need to write more</p>
+{% endif %}

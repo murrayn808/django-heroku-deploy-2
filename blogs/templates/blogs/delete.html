@@ -1,0 +1,5 @@
+<a href="{% url 'blogs:index' %}">HOME</a>
+<form method="post">{% csrf_token %}
+    <p>Are you sure? This will be gone forever "{{ object.text }}"?</p>
+    <input type="submit" value="Confirm">
+</form>
