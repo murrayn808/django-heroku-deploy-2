@@ -1,5 +1,5 @@
 django~=2.1.7
 django-filter
 gunicorn 
-psycopg2-binary>=2.8,<2.9
+psycopg2-binary~=2.8.0
 django-heroku
